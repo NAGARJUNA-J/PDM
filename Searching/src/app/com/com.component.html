@@ -1,0 +1,110 @@
+
+<form  [formGroup]="reactive">
+        <div class="card clickable">
+    <div class="clr-row">
+        <div class="clr-col">
+                <clr-input-container>
+                <label class="label label-blue"><b>Name</b></label>
+                <input clrInput type="text"   placeholder="Enter Name" name="name" formControlName="name"
+                    [class.is-invalid]="this.reactive.get('name').invalid && this.reactive.get('name').touched" />
+                <div *ngIf="this.reactive.get('name').errors?.required && this.reactive.get('name').touched">
+                    <small class="text-danger">Name Is Required</small></div> </clr-input-container>
+        </div>
+
+
+        <div class="clr-col">
+                <div >
+            <clr-input-container>
+            <label class="label label-blue">Email Id</label>
+            <input  type="email" clrInput placeholder="Enter Email Id" name="email" formControlName="email"
+            [class.is-invalid]="this.reactive.get('email').invalid && this.reactive.get('email').touched" />
+            <div *ngIf="this.reactive.get('email').errors?.required && this.reactive.get('email').touched">
+            <small class="text-danger">Email is required</small></div>
+            <div *ngIf="this.reactive.get('email').errors?.email"><small class="text-danger">Email must be a valid email address</small></div>
+            </clr-input-container></div>
+         </div>
+        <div class="clr-col">
+            <clr-input-container>  
+            <label class="label label-blue">Phone Number</label>
+            <input  type="number" clrInput placeholder="phone number" name="phone" formControlName="phone"
+            [class.is-invalid]="this.reactive.get('phone').invalid && this.reactive.get('phone').touched" />
+            <div *ngIf="this.reactive.get('phone').errors?.required && this.reactive.get('phone').touched">
+            <small class="text-danger">Phone is required</small></div>
+            <div *ngIf="this.reactive.get('phone').errors?.pattern"><small class="text-danger">Please, Enter 10 digit Mobile Number</small></div>
+            </clr-input-container></div>
+    </div>
+
+    <br>
+
+    <br>
+    <div class="clr-row">
+        <div class="clr-col">
+            <label class="label label-blue">Skills</label>
+            <clr-radio-wrapper>
+                <input  type="radio" clrRadio required value="java" name="rad" formControlName="rad" />
+                <label>Java</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input  type="radio" clrRadio required value="Angular" name="rad" formControlName="rad" />
+                <label>Angular</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input  type="radio" clrRadio  required value="PHP" name="rad" formControlName="rad" />
+                <label>PHP</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input  type="radio" clrRadio name="options" required value="Python" name="rad" formControlName="rad" />
+                <label>Python</label>
+            </clr-radio-wrapper>
+       
+
+        </div>
+        <div class="clr-col">
+            <label class="label label-blue">ID No</label>
+            <input type="number" formControlName="id" clrInput>
+
+        </div>
+        <div class="clr-col">
+             
+                <label class="label label-blue">Country</label>
+                <div  >
+                    <select clrSelect class="dropdown-toggle" formControlName="sel" placeholder="Phantasyland" (change)="changeCountry($event.target.value)">
+                        <option *ngFor ="let count of countryList">{{count.name}} </option>
+                    </select>
+                </div>
+                
+                
+                <label class="label label-blue">State</label>
+                <div >
+                    <select class="dropdown-toggle" clrSelect formControlName="sel1" placeholder="Anycity">
+                        <option *ngFor ="let city of cities">{{city}} </option>
+                  </select>
+                </div>
+              
+        </div>
+    
+</div>
+   <button (click)="Search()" >Search</button> 
+   </div>
+</form>
+
+<table class="table">
+        <tr>
+            <th>ID Number</th>
+            <th>Name</th>
+            <th>Email-Id</th>
+            <th>Phonenumber</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>Skills</th>
+        </tr>
+        <tr *ngFor='let o of emps'>
+            <td>{{o.id}}</td>
+            <td>{{o.fname}}</td>
+            <td>{{o.email}}</td>
+            <td>{{o.phonenumber}}</td>
+            <td>{{o.country}}</td>
+            <td>{{o.state}}</td>
+            <td>{{o.skill}}</td>
+        </tr>
+</table>
